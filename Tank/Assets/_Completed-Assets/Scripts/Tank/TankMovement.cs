@@ -21,13 +21,11 @@ namespace Complete
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
-        //private Camera mainCamera;
+
 
         private void Awake()
         {
             m_Rigidbody = GetComponent<Rigidbody>();
-            // mainCamera = Camera.main;
-            // mainCamera.transform.SetParent(transform, false);
         }
 
 
