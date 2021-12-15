@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Tanks;
 
 namespace Complete
 {
@@ -20,9 +21,13 @@ namespace Complete
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+        //private Camera mainCamera;
+
         private void Awake()
         {
             m_Rigidbody = GetComponent<Rigidbody>();
+            // mainCamera = Camera.main;
+            // mainCamera.transform.SetParent(transform, false);
         }
 
 
@@ -113,6 +118,7 @@ namespace Complete
             // Adjust the rigidbodies position and orientation in FixedUpdate.
             Move();
             Turn();
+            TurnTankTurret();
         }
 
 
@@ -136,6 +142,19 @@ namespace Complete
 
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+        }
+
+        private void TurnTankTurret()
+        {
+            var tankTurret = transform.FindAnyChild<Transform>("TankTurret").gameObject;
+            if (Input.GetKey(KeyCode.Q))
+            {
+                tankTurret.gameObject.transform.Rotate(0f, -m_TurnSpeed * Time.deltaTime, 0f);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                tankTurret.gameObject.transform.Rotate(0f, m_TurnSpeed * Time.deltaTime, 0f);
+            }
         }
     }
 }
